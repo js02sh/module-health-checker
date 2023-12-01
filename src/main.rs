@@ -1,5 +1,5 @@
-mod bmi_checker;
-use bmi_checker::bmi_clac::Body;
+mod body_checker;
+use body_checker::bmi_clac::Body;
 use std::io;
 
 fn main() {
