@@ -3,9 +3,6 @@ use crate::input::input;
 use super::linear_rand::rand;
 use super::age::ageclac;
 use super::data::{checker,database};
-// ... (imports and other code)
-
-// ... (imports and other code)
 
 pub fn member_main(check: bool){
     loop {
@@ -50,7 +47,6 @@ pub fn member_main(check: bool){
             );
             println!("************************************************\n");
             database(name.clone(), age, member_id, gen.to_string());
-
         };
 
         // Ask if the user wants to start again
@@ -62,10 +58,13 @@ pub fn member_main(check: bool){
             "n" => {
                 println!("Goodbye!");
                 return;
+                //break;
             }
             _ => {
                 println!("Invalid option. Exiting.");
                 return;
+                //break;
+
             }
         }
     }

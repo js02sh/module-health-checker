@@ -20,13 +20,9 @@ pub struct PersonInfo {
     measurements: Vec<(String, u64, u64, u64)>,
 }
 
-fn float_to_u64(value: f64) -> u64 {
-    (value * 100.0) as u64
-}
-
 impl PersonInfo {
     fn new(name: String, age: u32, member_id: u32, gen: String) -> PersonInfo{
-        let measurements = vec![bodycheck(name.clone())]; // assuming bodycheck returns a tuple
+        let measurements = vec![bodycheck(name.clone())]; 
         PersonInfo { 
             name: name, 
             member_id: member_id, 
@@ -71,15 +67,12 @@ fn create_sample_data() -> (String, PersonInfo) {
         age: 25,
         gender: "Female".to_string(),
         measurements: vec![
-            ("2023-01-01".to_string(), float_to_u64(160.0), float_to_u64(50.0), float_to_u64(22.0)),
-            ("2023-02-01".to_string(), float_to_u64(162.0), float_to_u64(52.0), float_to_u64(23.0)),
+            ("2023-01-01".to_string(), 160. as u64, 50.0 as u64, 22.0 as u64),
+            ("2023-02-01".to_string(), 162. as u64, 52.0 as u64, 23.0 as u64),
         ],
     };
     (key.1.clone().to_string(), value)
 }
-
-// ... (imports and other code)
-// ... (imports and other code)
 
 fn add_sample_data() {
     unsafe {
