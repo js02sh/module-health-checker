@@ -1,1 +1,1 @@
-pub mod bmi_clac;
+pub mod bmi_calc;

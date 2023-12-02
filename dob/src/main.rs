@@ -4,6 +4,7 @@ use chrono::prelude::*;
 fn ageclac(dob: &str) -> i32{
     // Get today's date
     let today = Local::now().naive_local().date();
+    println!("{}",today);
 
     // Get the user's date of birth
     //println!("Enter your date of birth (YYYYMMDD): ");
