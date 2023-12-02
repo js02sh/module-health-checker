@@ -34,13 +34,12 @@ fn main () {
                     member_main(false); // send false. go for signup
                 } else if mem == "n" {
                     println!("Have a nice day, Bye.");
-                    //break 'loop_1;
+                    //break;
                 } else {
                     println!("Please input valid input");
                     //continue;
                 }
             }
-            //"q" => break 'loop_1,
             "q" => println!("Bye~"),
             _ => println!(".."),
         }

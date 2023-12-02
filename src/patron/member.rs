@@ -8,7 +8,7 @@ use super::data::{checker,database};
 // ... (imports and other code)
 
 pub fn member_main(check: bool){
-    'outer: loop {
+    loop {
         println!("What's your name?:");
         let name = input();
         println!("Hi {}, your Date of Birth: ", name);
@@ -28,8 +28,9 @@ pub fn member_main(check: bool){
                     database(name.clone(), age, member_id, "gen".to_string());
                 }
                 Err(_) => {
-                    println!("User not found. Please try again.");
-                    continue 'outer; // Restart the loop if the user is not found
+                    println!("User not found. Let's make new ID");
+                    member_main(false);
+                    //ontinue 'outer; // Restart the loop if the user is not found
                 }
             }
         } else {
@@ -48,34 +49,23 @@ pub fn member_main(check: bool){
                 name, member_id, age, gen
             );
             println!("************************************************\n");
-            database(name.clone(), age, member_id, "gen".to_string());
+            database(name.clone(), age, member_id, gen.to_string());
 
-            //Call the checker function and handle the result
-            // match checker(&name, member_id) {
-            //     Ok(_) => {
-            //         println!("Signup successful!");
-            //         database(name.clone(), age, member_id, "gen".to_string());
-            //     }
-            //     Err(_) => {
-            //         println!("Error creating user. Please try again.");
-            //         continue 'outer; // Restart the loop if there is an error creating the user
-            //     }
-            // }
         };
 
         // Ask if the user wants to start again
         println!("Do you want to start again? (Yes: 'y', No: 'n')");
         let restart = input();
         match restart.trim() {
-            "y" => continue 'outer,
+            //"y" => continue 'outer,
+            "y" => member_main(true),
             "n" => {
                 println!("Goodbye!");
                 return;
             }
             _ => {
                 println!("Invalid option. Exiting.");
-                break 'outer;
-
+                return;
             }
         }
     }

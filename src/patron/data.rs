@@ -42,10 +42,11 @@ impl PersonInfo {
     }
 
     fn print_info(&self) {
+        println!("************************************\n");
         println!("Name: {}", self.name);
         println!("Member ID: {}", self.member_id);
         println!("Age: {}", self.age);
-        println!("Gender: {}", self.gender);
+        println!("Gender: {}\n", self.gender);
 
         // Printing measurements
         for (date, height, weight, bmi) in &self.measurements {
@@ -57,6 +58,7 @@ impl PersonInfo {
                 *bmi as f64,
             );
         }
+        println!("\n************************************\n");
     }
 }
 
@@ -73,7 +75,7 @@ fn create_sample_data() -> (String, PersonInfo) {
             ("2023-02-01".to_string(), float_to_u64(162.0), float_to_u64(52.0), float_to_u64(23.0)),
         ],
     };
-    (key.0.clone(), value)
+    (key.1.clone().to_string(), value)
 }
 
 // ... (imports and other code)
@@ -97,7 +99,7 @@ pub fn checker(name: &str, member_id: u32) -> Result<(), ()> {
     unsafe {
         if let Some(person_map) = PERSON_MAP.as_ref() {
             let key = (name.to_string(), member_id);
-            if let Some(info) = person_map.get(&key.0) {
+            if let Some(info) = person_map.get(&key.1.to_string()) {
                 println!("User found:");
                 info.print_info();
                 Ok(())
@@ -117,12 +119,12 @@ pub fn database(name: String, age: u32, member_id: u32, gen: String) {
         let mut person_map = PERSON_MAP.take().unwrap_or_else(HashMap::new);
 
         // Sample data
-        let (sample_key, sample_value) = create_sample_data();
-        person_map.insert(sample_key.clone(), sample_value);
+        // let (sample_key, sample_value) = create_sample_data();
+        // person_map.insert(sample_key.clone(), sample_value);
 
         loop {
             let key = (name.clone(), member_id);
-            if let Some(info) = person_map.get_mut(&key.0) {
+            if let Some(info) = person_map.get_mut(&key.1.to_string()) {
                 println!("Your previous data:");
                 info.print_info();
                 println!("Would you like to add new data?:");
@@ -143,13 +145,11 @@ pub fn database(name: String, age: u32, member_id: u32, gen: String) {
                 println!("We need to add new data today");
                 let key2 = key.clone();
                 let new_person = PersonInfo::new(name.clone(), age, member_id, gen.clone());
-                person_map.insert(key.0.clone(), new_person);
+                person_map.insert(key.1.clone().to_string(), new_person);
                 if let Some(info) = person_map.get(&key2.0) {
                     info.print_info();
                     println!("\n");
                 }
-
-                
             }
         }
 
